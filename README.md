@@ -1,81 +1,39 @@
-## Impact of Discretization on DecisionTable Classifier Performance in WEKA 
+# Discretization and the DecisionTable Classifier (WEKA)
 
-This project explores how different data discretization techniques affect the predictive accuracy and interpretability of the **DecisionTable** rule-based classifier. Using the **Pima Indians Diabetes dataset**, we compare baseline performance against several pre-processing methods to determine the most effective approach for rule-based modeling.
+Does binning continuous attributes help a rule-based classifier? This project tests four versions of the Pima Indians Diabetes dataset with WEKA's DecisionTable classifier and compares their accuracy.
 
-##  Project Overview
+## Setup
 
-The primary goal of this study was to evaluate if transforming continuous attributes into categorical "bins" (discretization) improves the performance of the DecisionTable algorithm in WEKA.
+- **Tool:** WEKA
+- **Data:** `diabetes.arff` (Pima Indians Diabetes, 768 patients, 8 attributes)
+- **Classifier:** DecisionTable
+- **Evaluation:** 10-fold cross-validation
 
-##  Experimental Setup
+Discretization methods compared:
 
-* **Tools Used:** WEKA Data Mining Software.
+1. None (baseline)
+2. Unsupervised discretization (equal-width bins, ignores the class label)
+3. Supervised discretization (cut points chosen with the class label)
+4. PKIDiscretize (proportional k-interval)
 
+## Results
 
-* **Dataset:** `diabetes.arff` (Pima Indians Diabetes).
-
-
-* **Classifier:** DecisionTable.
-
-
-* **Evaluation Method:** 10-fold Cross-validation.
-
-
-
-Discretization Methods Tested 
-
-1. **Original Dataset:** No discretization (baseline).
-
-
-2. **Unsupervised Discretization:** Binning without considering class labels.
-
-
-3. **Supervised Discretization:** Uses class information to find optimal cut points.
-
-
-4. **PKIDiscretize:** Proportional k-Interval discretization.
-
-
-
-##  Results & Accuracy Comparison
-
-| Dataset Version | Correctly Classified | Incorrectly Classified | Accuracy (%) |
-| :--- | :---: | :---: | :---: |
-| Original Dataset | 547 | 221 | 71.22% |
-| Unsupervised Discretize | 556 | 212 | 72.39% |
-| Supervised Discretize | 585 | 183 | 76.17% |
+| Dataset version | Correct | Incorrect | Accuracy |
+|---|---:|---:|---:|
+| Original | 547 | 221 | 71.22% |
+| Unsupervised discretize | 556 | 212 | 72.39% |
+| Supervised discretize | 585 | 183 | **76.17%** |
 | PKIDiscretize | 568 | 200 | 73.95% |
 
- Key Findings 
+- Supervised discretization gave the best accuracy, five points above the baseline, because its cut points are chosen to separate the classes.
+- Every discretized version beat the raw continuous data. DecisionTable builds rules from attribute values, so fewer distinct values make its rules more general.
 
-* **Supervised Discretization** yielded the highest accuracy (76.17%), as it maximizes class separation by using label-informed cut points.
+## Files
 
+| File | Contents |
+|---|---|
+| `DATA MINING CS619.pptx` | Presentation with WEKA screenshots and results |
 
-* **Rule-based models** like DecisionTable generally perform better on categorical data than raw continuous attributes.
+## Team
 
-
-* **Class-informed methods** are significantly more effective for enhancing both predictive performance and model interpretability.
-
-
-
-👥 Contributors 
-
-* **Muhammad Ehtesham** 
-
-
-* Arifa Farhath 
-
-
-* Bhavesh 
-
-
-* Shivam 
-
-
-* Nitish 
-
-
-* Yogesh 
-
-
-
----
+Muhammad Ehtesham, Arifa Farhath, Bhavesh, Shivam, Nitish, Yogesh
